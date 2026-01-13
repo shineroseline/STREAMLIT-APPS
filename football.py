@@ -9,15 +9,26 @@ import plotly.express as px
 
 st.set_page_config(page_title='Football Players Dashboard', layout='wide')
 
+# @st.cache_data
+# def load_data():
+#     df = pd.read_csv("C:\\Users\\shine\\STREAMLIT\\Latest Football  Players 2024 Data.csv", encoding='ascii')
+#     # basic cleaning
+#     for c in ['Matches', 'Goals', 'Assists', 'Seasons Ratings']:
+#         df[c] = pd.to_numeric(df[c], errors='coerce')
+#     df['Teams'] = df['Teams'].astype(str).str.strip()
+#     df['Players'] = df['Players'].astype(str).str.strip()
+#     df['Seasons'] = df['Seasons'].astype(str).str.strip()
+#     return df
+
+
+import os
+import pandas as pd
+import streamlit as st
+
 @st.cache_data
 def load_data():
-    df = pd.read_csv("C:\\Users\\shine\\STREAMLIT\\Latest Football  Players 2024 Data.csv", encoding='ascii')
-    # basic cleaning
-    for c in ['Matches', 'Goals', 'Assists', 'Seasons Ratings']:
-        df[c] = pd.to_numeric(df[c], errors='coerce')
-    df['Teams'] = df['Teams'].astype(str).str.strip()
-    df['Players'] = df['Players'].astype(str).str.strip()
-    df['Seasons'] = df['Seasons'].astype(str).str.strip()
+    csv_path = os.path.join(os.path.dirname(__file__), "Latest Football Players 2024 Data.csv")
+    df = pd.read_csv(csv_path, encoding="ascii")
     return df
 
 df = load_data()
@@ -159,5 +170,6 @@ st.dataframe(fdf.reset_index(drop=True), use_container_width=True)
 
 
 # 
+
 
 print('football.py')
